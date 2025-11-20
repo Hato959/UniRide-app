@@ -239,7 +239,7 @@ import { AuthValidators } from '../validators/auth.validators';
       color: white;
       border: none;
       padding: 15px;
-      border-radius: 30px; /* Redondeado como en la imagen */
+      border-radius: 30px;
       font-size: 1.1rem;
       font-weight: bold;
       cursor: pointer;
@@ -285,11 +285,11 @@ export class RegisterComponent {
 
   registerForm: FormGroup = this.fb.group({
     nombre: ['', [Validators.required, AuthValidators.fullName()]],
-    correoInstitucional: ['', [Validators.required, Validators.email]], // Validación de UPC está en el validator
+    correoInstitucional: ['', [Validators.required, Validators.email]],
     dni: ['', [Validators.required, AuthValidators.peruvianDNI()]],
     distrito: ['', Validators.required],
     carrera: ['', Validators.required],
-    telefono: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]], // Simple regex para 9 dígitos
+    telefono: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]],
     contrasena: ['', [Validators.required, Validators.minLength(6)]],
     rolActivo: ['PASAJERO', Validators.required]
   });

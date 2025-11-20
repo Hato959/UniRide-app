@@ -8,7 +8,6 @@ import { NavbarLandingComponent } from '../components/navbar-landing.component';
 @Component({
   selector: 'app-landing-layout',
   standalone: true,
-  // 2. CAMBIO: Lo agregamos a los imports
   imports: [CommonModule, RouterOutlet, NavbarLandingComponent, FooterComponent],
   template: `
     <div class="layout-container">

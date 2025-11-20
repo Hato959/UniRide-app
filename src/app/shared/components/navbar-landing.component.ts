@@ -10,9 +10,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     <header>
         <div class="logo-container">
             <a routerLink="/home" class="logo-link">
-                <!-- IMAGEN DEL LOGO -->
                 <img src="images/logo-uniride.png" alt="Logo UniRide" class="logo-img">
-                <!-- Texto opcional si la imagen ya tiene el texto, bórralo -->
                 <span class="brand-name">UNIRIDE</span>
             </a>
         </div>
@@ -52,7 +50,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 
     /* Estilo para la IMAGEN del logo */
     .logo-img {
-        height: 80px; /* Ajusta la altura según tu imagen */
+        height: 80px;
         width: auto;
         object-fit: contain;
     }
@@ -103,7 +101,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     .btn-register:hover { background-color: #b00000; transform: translateY(-1px); }
 
     @media (max-width: 768px) {
-        .nav-links { display: none; } /* Ocultar en móvil (pendiente menú hamburguesa) */
+        .nav-links { display: none; }
     }
   `]
 })

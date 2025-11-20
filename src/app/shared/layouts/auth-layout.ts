@@ -41,16 +41,16 @@ import { FooterComponent } from './../../shared/components/footer';
     .layout-container {
       display: flex;
       flex-direction: column;
-      min-height: 100vh; /* Ocupa toda la altura de la pantalla */
+      min-height: 100vh;
     }
 
     .main-content {
-      flex: 1; /* Empuja el footer hacia abajo si hay poco contenido */
-      background-color: #f8f9fa; /* Un gris muy clarito para el fondo de la app interna */
-      padding-top: 80px; /* Compensación para el Navbar fijo (ajusta según la altura de tu navbar) */
+      flex: 1;
+      background-color: #f8f9fa;
+      padding-top: 80px;
     }
 
-    /* Ajuste responsive si el navbar cambia de altura en móvil */
+
     @media (max-width: 768px) {
       .main-content {
         padding-top: 70px;

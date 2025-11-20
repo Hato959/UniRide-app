@@ -18,7 +18,6 @@ import { RouterLink } from '@angular/router';
         <div class="hero-visual">
           <div class="app-card">
               <div class="image-container">
-               <!-- Asegúrate de que la imagen se llame así en src/assets/images/ -->
                <img src="images/app-preview.png" alt="Vista previa de la App" class="hero-img">
               </div>
           </div>
@@ -49,7 +48,6 @@ import { RouterLink } from '@angular/router';
     </div>
   `,
   styles: [`
-    /* Estilos extraídos de tu index.html y adaptados */
 
     .landing-container {
       width: 100%;
@@ -110,12 +108,9 @@ import { RouterLink } from '@angular/router';
     }
 
     .app-card {
-      /* Quitamos el fondo blanco de tarjeta si la imagen ya tiene su propio marco o si quieres que flote */
-      /* background-color: var(--card-white); */
       padding: 20px;
-      /* box-shadow: ... */
       width: 100%;
-      max-width: 400px; /* Ajusta el tamaño máximo de la imagen */
+      max-width: 600px;
       text-align: center;
       display: flex;
       justify-content: center;
@@ -131,7 +126,6 @@ import { RouterLink } from '@angular/router';
       width: 100%;
       height: auto;
       object-fit: contain;
-      /* Opcional: Sombra suave a la imagen */
       filter: drop-shadow(0 10px 15px rgba(0,0,0,0.15));
     }
 

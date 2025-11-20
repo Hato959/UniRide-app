@@ -72,7 +72,6 @@ import { LoginRequest } from '../../../core/models/auth.model';
     </div>
   `,
   styles: [`
-    /* Reutilizamos estilos base para consistencia */
     .login-layout {
       min-height: 100vh;
       background-color: #fff;
@@ -160,7 +159,7 @@ export class LoginComponent {
       this.errorMessage.set('');
 
       const credentials: LoginRequest = {
-        correo: this.loginForm.value.email, // Adaptado a tu modelo (correo, no email)
+        correo: this.loginForm.value.email,
         contrasena: this.loginForm.value.password
       };
 
