@@ -43,7 +43,8 @@ export interface AuthResponse {
   token: string;
   nombre: string;
   rol: string;
-  usuarioId: number;
+  usuarioId?: number;
+  id?: number;
   conductorId?: number;
   pasajeroId?: number;
 }

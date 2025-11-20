@@ -42,7 +42,10 @@ export const routes: Routes = [
     component: AuthLayoutComponent, // Este tiene el NavbarUser (con menú de conductor/pasajero)
     canActivate: [authGuard],       // Protege todas las rutas hijas
     children: [
-
+      {
+        path: 'perfil',
+        loadChildren: () => import('./features/profile/profile.routes').then(m => m.PROFILE_ROUTES)
+      }
     ]
   },
 

@@ -6,13 +6,14 @@ import { environment } from '../../../environments/environment';
 import { LoginRequest, RegisterRequest, AuthResponse } from '../models/auth.model';
 import { StorageService } from './storage.service';
 
-// 1. ACTUALIZAR LA INTERFAZ DE SESIÓN
+// 1. ACTUALIZAR LA INTERFAZ DE SESION
 export interface UserSession {
   nombre: string;
   rol: string;
   token: string;
   // Nuevos campos para guardar en memoria
-  usuarioId: number;
+  usuarioId?: number;
+  id?: number;
   conductorId?: number;
   pasajeroId?: number;
 }
@@ -44,7 +45,7 @@ export class AuthService {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials).pipe(
       tap(response => {
         this.saveAuthData(response);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/perfil']);
       })
     );
   }
@@ -53,7 +54,7 @@ export class AuthService {
     return this.http.post<AuthResponse>(`${this.apiUrl}/register`, data).pipe(
       tap(response => {
         this.saveAuthData(response);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/perfil']);
       })
     );
   }
@@ -66,17 +67,20 @@ export class AuthService {
     this.router.navigate(['/auth/login']);
   }
 
-  // 2. ACTUALIZAR CÓMO GUARDAMOS LOS DATOS
+  // 2. ACTUALIZAR COMO GUARDAMOS LOS DATOS
   private saveAuthData(response: AuthResponse): void {
     this.storage.setItem('token', response.token);
     this._token.set(response.token);
 
-    // Mapeamos la respuesta del backend a nuestra sesión local
+    const userId = response.usuarioId ?? response.id;
+
+    // Mapeamos la respuesta del backend a nuestra sesion local
     const session: UserSession = {
       nombre: response.nombre,
       rol: response.rol,
       token: response.token,
-      usuarioId: response.usuarioId,
+      usuarioId: userId,
+      id: userId,
       conductorId: response.conductorId,
       pasajeroId: response.pasajeroId
     };
@@ -97,9 +101,9 @@ export class AuthService {
     }
   }
 
-  // 3. GETTERS ÚTILES
+  // 3. GETTERS UTILES
   get currentUsuarioId(): number | undefined {
-    return this._currentUser()?.usuarioId;
+    return this._currentUser()?.usuarioId ?? (this._currentUser() as any)?.id;
   }
 
   get currentConductorId(): number | undefined {

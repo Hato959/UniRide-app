@@ -163,14 +163,14 @@ export class LoginComponent {
         contrasena: this.loginForm.value.password
       };
 
-      this.authService.login(credentials).subscribe({
-        next: () => {
-          this.router.navigate(['/home']);
-        },
-        error: () => {
+    this.authService.login(credentials).subscribe({
+      next: () => {
+          this.router.navigate(['/perfil']);
+      },
+      error: () => {
           this.errorMessage.set('Credenciales incorrectas.');
           this.loading.set(false);
-        }
+      }
       });
     }
   }
