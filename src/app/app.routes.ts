@@ -9,7 +9,7 @@ import { AuthLayoutComponent } from './shared/layouts/auth-layout';
 
 export const routes: Routes = [
 
-  // 1. ZONA PÚBLICA (Landing Layout)
+  // 1. ZONA PUBLICA (Landing Layout)
   {
     path: '',
     component: LandingLayoutComponent,
@@ -30,7 +30,7 @@ export const routes: Routes = [
     ]
   },
 
-  // 2. ZONA DE AUTENTICACIÓN (Sin Layout compartido)
+  // 2. ZONA DE AUTENTICACION (Sin Layout compartido)
   {
     path: 'auth',
     loadChildren: () => import('./features/auth/auth.routes').then(m => m.AUTH_ROUTES)
@@ -39,12 +39,16 @@ export const routes: Routes = [
   // 3. ZONA PRIVADA / APP INTERNA (Auth Layout)
   {
     path: '',
-    component: AuthLayoutComponent, // Este tiene el NavbarUser (con menú de conductor/pasajero)
+    component: AuthLayoutComponent, // Este tiene el NavbarUser (con menu de conductor/pasajero)
     canActivate: [authGuard],       // Protege todas las rutas hijas
     children: [
       {
         path: 'perfil',
         loadChildren: () => import('./features/profile/profile.routes').then(m => m.PROFILE_ROUTES)
+      },
+      {
+        path: 'conductor',
+        loadChildren: () => import('./features/driver/driver.routes').then(m => m.DRIVER_ROUTES)
       }
     ]
   },
