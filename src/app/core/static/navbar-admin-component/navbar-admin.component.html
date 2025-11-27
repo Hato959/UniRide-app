@@ -1,0 +1,37 @@
+<nav class="navbar">
+
+  <div class="brand-area">
+    <div class="red-square">
+      <i class="fas fa-shield-alt shield-icon"></i>
+    </div>
+
+    <div class="brand-text-container">
+      <a routerLink="/admin/dashboard" class="brand-name">UNIRIDE</a>
+      <span class="role-label">ADMINISTRADOR</span>
+    </div>
+  </div>
+
+  <div class="icons-area">
+
+    <a routerLink="/admin/dashboard" routerLinkActive="active" title="Panel de Control">
+      <i class="fas fa-chart-line"></i>
+    </a>
+
+    <a routerLink="/admin/usuarios" routerLinkActive="active" title="Gestionar Usuarios">
+      <i class="fas fa-users-cog"></i>
+    </a>
+
+    <a routerLink="/admin/busqueda" title="Buscar Registros">
+      <i class="fas fa-search"></i>
+    </a>
+
+    <a routerLink="/admin/notificaciones" routerLinkActive="active" title="Alertas del Sistema">
+      <i class="fas fa-bell"></i>
+    </a>
+
+    <button (click)="logout()" class="text-logout" title="Cerrar Sesión">
+      <i class="fas fa-power-off"></i>
+    </button>
+
+  </div>
+</nav>
