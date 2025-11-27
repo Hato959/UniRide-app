@@ -10,6 +10,10 @@ export const AUTH_ROUTES: Routes = [
     loadComponent: () => import('./pages/register.component').then(m => m.RegisterComponent)
   },
   {
+  path: 'validation',
+  loadComponent: () => import('./pages/validation.component').then(m => m.ValidationComponent)
+  },
+  {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
