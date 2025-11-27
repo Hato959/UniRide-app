@@ -7,12 +7,11 @@ import { LoginRequest, RegisterRequest, AuthResponse } from '../models/auth.mode
 import { StorageService } from './storage.service';
 import { UserService } from './user.service';
 
-// 1. ACTUALIZAR LA INTERFAZ DE SESIÓN
+// 1. ACTUALIZAR LA INTERFAZ DE SESION
 export interface UserSession {
   nombre: string;
   rol: string;
   token: string;
-  // Nuevos campos para guardar en memoria
   usuarioId: number;
   conductorId?: number;
   pasajeroId?: number;
@@ -46,17 +45,17 @@ export class AuthService {
 
   login(credentials: LoginRequest): Observable<any> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials).pipe(
-      // 1. Guardamos datos básicos del login
+      // 1. Guardamos datos basicos del login
       tap(response => this.saveAuthData(response)),
 
-      // 2. Encadenamos una llamada al perfil para saber si está verificado
+      // 2. Encadenamos una llamada al perfil para saber si esta verificado
       switchMap(response => {
         return this.userService.getProfile(response.usuarioId);
       }),
 
-      // 3. Con la info del perfil, decidimos dónde ir
+      // 3. Con la info del perfil, decidimos donde ir
       tap(perfil => {
-        // Actualizamos la sesión con el estado de verificado
+        // Actualizamos la sesion con el estado de verificado
         this.updateVerificationStatus(perfil.verificado);
 
         if (perfil.verificado) {
@@ -72,7 +71,7 @@ export class AuthService {
     return this.http.post<AuthResponse>(`${this.apiUrl}/register`, data).pipe(
       tap(response => {
         this.saveAuthData(response);
-        // Un usuario recién registrado NO está verificado
+        // un usuario recien registrado no esta verificado
         this.updateVerificationStatus(false);
         this.router.navigate(['/auth/validation']);
       })
@@ -87,7 +86,7 @@ export class AuthService {
     this.router.navigate(['/auth/login']);
   }
 
-  // 2. ACTUALIZAR CÓMO GUARDAMOS LOS DATOS
+  // 2. ACTUALIZAR COMO GUARDAMOS LOS DATOS
   private saveAuthData(response: AuthResponse): void {
     this.storage.setItem('token', response.token);
     this._token.set(response.token);

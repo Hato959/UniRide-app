@@ -37,7 +37,7 @@ import { AuthValidators } from './../validators/auth.validators';
         <div class="validation-card">
           <form [formGroup]="validationForm">
 
-            <!-- SECCIÓN 1: Correo (Pre-llenado) -->
+            <!-- SECCIÓN 1: Correo -->
             <div class="form-section">
               <div class="input-row">
                 <i class="far fa-envelope icon-red"></i>
@@ -87,7 +87,7 @@ import { AuthValidators } from './../validators/auth.validators';
                   maxlength="8"
                   [class.error-border]="isFieldInvalid('dni')">
 
-                <!-- Botón de formato DNI (Activado con tu validador) -->
+                <!-- Botón de formato DNI -->
                 <button type="button" (click)="validarFormatoDni()" class="btn-red btn-medium">Verificar DNI</button>
               </div>
               @if (isFieldInvalid('dni')) {
@@ -349,7 +349,6 @@ export class ValidationComponent implements OnInit {
   enviarCodigo() {
     const emailControl = this.validationForm.get('email');
 
-    // Habilitar temporalmente para leer el valor (si el campo está disable())
     const isEmailDisabled = emailControl?.disabled;
     if (isEmailDisabled) emailControl.enable();
 
@@ -398,7 +397,6 @@ export class ValidationComponent implements OnInit {
     this.loadingVerify.set(true);
     this.message.set('');
 
-    // Habilitar el email temporalmente si estaba deshabilitado para que se incluya en el form.value
     const emailControl = this.validationForm.get('email');
     const isEmailDisabled = emailControl?.disabled;
     if (isEmailDisabled) emailControl.enable();
@@ -409,7 +407,6 @@ export class ValidationComponent implements OnInit {
       codigoVerificacion: this.validationForm.value.codigo
     };
 
-    // Restaurar el estado de deshabilitado después de leer el valor
     if (isEmailDisabled) emailControl.disable();
 
     this.validationService.verificarUsuario(request).subscribe({
