@@ -165,7 +165,7 @@ export class LoginComponent {
 
       this.authService.login(credentials).subscribe({
         next: () => {
-          this.router.navigate(['/home']);
+          //this.router.navigate(['/home']);
         },
         error: () => {
           this.errorMessage.set('Credenciales incorrectas.');

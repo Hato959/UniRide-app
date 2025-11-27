@@ -1,21 +1,24 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { Observable, tap, switchMap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { LoginRequest, RegisterRequest, AuthResponse } from '../models/auth.model';
 import { StorageService } from './storage.service';
+import { UserService } from './user.service';
 
-// 1. ACTUALIZAR LA INTERFAZ DE SESIÓN
+// 1. ACTUALIZAR LA INTERFAZ DE SESION
 export interface UserSession {
   nombre: string;
   rol: string;
   token: string;
-  // Nuevos campos para guardar en memoria
   usuarioId: number;
   conductorId?: number;
   pasajeroId?: number;
+  verificado?: boolean;
+  correoInstitucional: string;
 }
+
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +27,7 @@ export class AuthService {
   private http = inject(HttpClient);
   private storage = inject(StorageService);
   private router = inject(Router);
+  private userService = inject(UserService);
   private apiUrl = `${environment.apiUrl}/auth`;
 
   // Signals
@@ -39,12 +43,26 @@ export class AuthService {
     this.loadAuthData();
   }
 
-  // LOGIN (Sin cambios en la firma, solo procesa diferente)
-  login(credentials: LoginRequest): Observable<AuthResponse> {
+  login(credentials: LoginRequest): Observable<any> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials).pipe(
-      tap(response => {
-        this.saveAuthData(response);
-        this.router.navigate(['/home']);
+      // 1. Guardamos datos basicos del login
+      tap(response => this.saveAuthData(response)),
+
+      // 2. Encadenamos una llamada al perfil para saber si esta verificado
+      switchMap(response => {
+        return this.userService.getProfile(response.usuarioId);
+      }),
+
+      // 3. Con la info del perfil, decidimos donde ir
+      tap(perfil => {
+        // Actualizamos la sesion con el estado de verificado
+        this.updateVerificationStatus(perfil.verificado);
+
+        if (perfil.verificado) {
+          this.router.navigate(['/home']);
+        } else {
+          this.router.navigate(['/auth/validation']);
+        }
       })
     );
   }
@@ -53,7 +71,9 @@ export class AuthService {
     return this.http.post<AuthResponse>(`${this.apiUrl}/register`, data).pipe(
       tap(response => {
         this.saveAuthData(response);
-        this.router.navigate(['/home']);
+        // un usuario recien registrado no esta verificado
+        this.updateVerificationStatus(false);
+        this.router.navigate(['/auth/validation']);
       })
     );
   }
@@ -66,7 +86,7 @@ export class AuthService {
     this.router.navigate(['/auth/login']);
   }
 
-  // 2. ACTUALIZAR CÓMO GUARDAMOS LOS DATOS
+  // 2. ACTUALIZAR COMO GUARDAMOS LOS DATOS
   private saveAuthData(response: AuthResponse): void {
     this.storage.setItem('token', response.token);
     this._token.set(response.token);
@@ -78,12 +98,23 @@ export class AuthService {
       token: response.token,
       usuarioId: response.usuarioId,
       conductorId: response.conductorId,
-      pasajeroId: response.pasajeroId
+      pasajeroId: response.pasajeroId,
+      verificado: false,
+      correoInstitucional: response.correoInstitucional
     };
 
     this.storage.setItem('user_session', session);
     this._currentUser.set(session);
     this._isAuthenticated.set(true);
+  }
+
+  private updateVerificationStatus(status: boolean) {
+    const current = this._currentUser();
+    if (current) {
+      const updated = { ...current, verificado: status };
+      this.storage.setItem('user_session', updated);
+      this._currentUser.set(updated);
+    }
   }
 
   private loadAuthData(): void {
@@ -98,27 +129,14 @@ export class AuthService {
   }
 
   // 3. GETTERS ÚTILES
-  get currentUsuarioId(): number | undefined {
-    return this._currentUser()?.usuarioId;
+  get currentEmail(): string | undefined {
+    return this._currentUser()?.correoInstitucional;
   }
-
-  get currentConductorId(): number | undefined {
-    return this._currentUser()?.conductorId;
-  }
-
-  get currentPasajeroId(): number | undefined {
-    return this._currentUser()?.pasajeroId;
-  }
-
-  get isConductor(): boolean {
-    return this._currentUser()?.rol === 'CONDUCTOR';
-  }
-
-  get isPasajero(): boolean {
-    return this._currentUser()?.rol === 'PASAJERO';
-  }
-
-  get isAdmin(): boolean {
-    return this._currentUser()?.rol === 'ADMIN';
-  }
+  get currentUsuarioId(): number | undefined { return this._currentUser()?.usuarioId; }
+  get currentConductorId(): number | undefined { return this._currentUser()?.conductorId; }
+  get currentPasajeroId(): number | undefined { return this._currentUser()?.pasajeroId; }
+  get isConductor(): boolean { return this._currentUser()?.rol === 'CONDUCTOR'; }
+  get isPasajero(): boolean { return this._currentUser()?.rol === 'PASAJERO'; }
+  get isAdmin(): boolean { return this._currentUser()?.rol === 'ADMIN'; }
+  get isVerified(): boolean { return this._currentUser()?.verificado ?? false; }
 }

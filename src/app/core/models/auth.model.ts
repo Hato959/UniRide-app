@@ -46,4 +46,5 @@ export interface AuthResponse {
   usuarioId: number;
   conductorId?: number;
   pasajeroId?: number;
+  correoInstitucional: string;
 }
