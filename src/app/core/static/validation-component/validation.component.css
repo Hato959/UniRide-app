@@ -1,0 +1,153 @@
+.validation-layout {
+  min-height: 100vh;
+  background-color: #BFBFBF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* HEADER ROJO (Reutilizado para consistencia) */
+.uniride-header {
+  width: 100%;
+  background-color: #D50100;
+  padding: 40px 0;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+.header-content { text-align: center; color: white; }
+.logo-container { font-size: 3rem; display: flex; justify-content: center; gap: 10px; margin-bottom: 10px; }
+.pole { font-size: 2rem; opacity: 0.8; margin-top: 10px; }
+.brand-name { font-family: 'Roboto', sans-serif; font-weight: 700; font-size: 2.5rem; letter-spacing: 2px; margin: 0; }
+
+/* CONTENEDOR */
+.form-container {
+  width: 100%;
+  max-width: 600px;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.validation-header { text-align: center; margin-bottom: 20px; color: #000; }
+.validation-header h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: 10px; }
+.validation-header p { font-size: 1rem; color: #444; line-height: 1.4; }
+
+.validation-card {
+  background: white;
+  width: 100%;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* ELEMENTOS DE FORMULARIO */
+.icon-red { color: #D50100; font-size: 1.4rem; min-width: 30px; }
+.icon-red-small { color: #D50100; font-size: 1.1rem; margin-right: 8px; }
+
+.clean-input {
+  border: none;
+  font-size: 1.1rem;
+  width: 100%;
+  outline: none;
+  color: #333;
+  background: transparent;
+}
+
+.input-row { display: flex; align-items: center; margin-bottom: 5px; }
+
+.action-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.info-text { display: flex; align-items: center; }
+.text-block { display: flex; flex-direction: column; line-height: 1.2; font-size: 0.9rem; color: #333; }
+.text-block small { color: #666; font-size: 0.8rem; }
+
+.btn-secondary {
+  background: white;
+  border: 1px solid #D50100;
+  color: #D50100;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.btn-secondary:hover:not(:disabled) { background: #fff5f5; }
+.btn-secondary:disabled { border-color: #ccc; color: #ccc; cursor: not-allowed; }
+
+.divider { height: 1px; background: #eee; margin: 25px 0; }
+
+.bottom-section { display: flex; flex-direction: column; gap: 20px; }
+
+.input-line-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.line-input {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 8px 0;
+  width: 100%;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+.line-input:focus { border-bottom-color: #D50100; }
+.error-border { border-bottom-color: #D50100; }
+.error-msg { color: #D50100; font-size: 0.8rem; margin-top: -15px; display: block; }
+.error-text { color: #D50100; }
+
+/* BOTONES ROJOS */
+.btn-red {
+  background-color: #D50100;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-red:hover:not(:disabled) { background-color: #b00000; }
+.btn-red:disabled { background-color: #ccc; cursor: not-allowed; }
+
+.btn-medium { padding: 8px 20px; font-size: 0.9rem; white-space: nowrap; }
+.btn-large { padding: 12px 0; font-size: 1rem; width: 100%; }
+
+.footer-action { margin-top: 10px; }
+
+/* MENSAJES */
+.status-message { padding: 10px; border-radius: 8px; text-align: center; font-size: 0.9rem; margin-top: 10px; }
+.status-message.error { background-color: #ffe6e6; color: #D50100; }
+.status-message.success { background-color: #d4edda; color: #155724; }
+
+/* FOOTER NOTE */
+.footer-note {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #555;
+  font-size: 0.85rem;
+}
+.big-icon { font-size: 1.8rem; }
+.footer-note p { margin: 0; line-height: 1.4; }
+
+@media (max-width: 600px) {
+  .action-row { flex-direction: column; align-items: flex-start; gap: 15px; }
+  .btn-medium { width: 100%; margin-top: 10px; }
+  .input-line-group { flex-direction: column; align-items: flex-start; }
+}

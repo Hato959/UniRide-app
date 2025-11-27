@@ -1,0 +1,61 @@
+.login-layout {
+      min-height: 100vh;
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .uniride-header {
+      width: 100%;
+      background-color: #D50100;
+      padding: 50px 0;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 60px;
+    }
+
+    .header-content { text-align: center; color: white; }
+    .logo-container { font-size: 3.5rem; display: flex; justify-content: center; gap: 10px; margin-bottom: 10px; }
+    .pole { font-size: 2.2rem; opacity: 0.8; margin-top: 12px; }
+    .brand-name { font-family: 'Roboto', sans-serif; font-weight: 700; font-size: 2.8rem; letter-spacing: 2px; margin: 0; }
+
+    .form-container { width: 100%; max-width: 400px; padding: 0 20px; }
+    .login-form { display: flex; flex-direction: column; gap: 30px; }
+
+    input {
+      width: 100%;
+      padding: 12px 0;
+      border: none;
+      border-bottom: 1px solid #ccc;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s;
+      color: #555;
+    }
+    input:focus { border-bottom-color: #D50100; }
+    .error-border { border-bottom-color: #D50100; }
+
+    .form-options { display: flex; align-items: center; font-size: 0.9rem; color: #666; margin-top: -10px; }
+    .checkbox-container input { width: auto; margin-right: 8px; }
+
+    .btn-submit {
+      background-color: #D50100;
+      color: white;
+      border: none;
+      padding: 15px;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .btn-submit:hover:not(:disabled) { background-color: #b00000; }
+    .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; }
+
+    .forgot-password { text-align: center; margin-top: -10px; font-size: 0.85rem; }
+    .forgot-password a { color: #999; text-decoration: none; }
+
+    .register-link { text-align: center; font-size: 0.9rem; color: #666; margin-top: 20px; }
+    .link-red { color: #D50100; text-decoration: none; font-weight: bold; }
+    .alert-error { color: #D50100; text-align: center; font-size: 0.9rem; }
