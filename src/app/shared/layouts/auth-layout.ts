@@ -1,11 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-
-// 1. Importamos el AuthService para saber el rol
 import { AuthService } from './../../core/services/auth.service';
-
-// 2. Importamos los componentes que vamos a usar
 import { NavbarUserComponent } from './../../shared/components/navbar-user.component';
 import { NavbarAdminComponent } from './../../shared/components/navbar-admin.component';
 import { FooterComponent } from './../../shared/components/footer';
@@ -47,7 +43,7 @@ import { FooterComponent } from './../../shared/components/footer';
     .main-content {
       flex: 1;
       background-color: #f8f9fa;
-      padding-top: 80px;
+      padding-top: 0;
     }
 
 
@@ -59,6 +55,5 @@ import { FooterComponent } from './../../shared/components/footer';
   `]
 })
 export class AuthLayoutComponent {
-  // Inyectamos el servicio para poder usar 'authService.isAdmin' en el HTML
   authService = inject(AuthService);
 }

@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { UsuarioResponse } from '../models/user.model';
-import { ValidacionUsuarioRequest, CambiarPasswordRequest } from '../models/auth.model';
+import { ValidacionUsuarioRequest, CambiarPasswordRequest, UsuarioRegisterRequest } from '../models/auth.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +29,26 @@ export class UserService {
   // Backend: @PostMapping("/verificar-usuario") en ValidacionController (Ruta: /validacion/verificar-usuario)
   validarCuenta(data: ValidacionUsuarioRequest): Observable<string> {
     return this.http.post(`${this.baseUrl}/validacion/verificar-usuario`, data, { responseType: 'text' });
+  }
+
+  actualizar(id: number, data: UsuarioRegisterRequest): Observable<UsuarioResponse> {
+    return this.http.put<UsuarioResponse>(`${this.baseUrl}/usuarios/${id}`, data).pipe(
+      tap(updatedProfile => this._userProfile.set(updatedProfile)) // Actualiza el signal local con los nuevos datos
+    );
+  }
+
+
+  // Backend: POST /usuarios/{id}/foto-perfil
+  subirFotoPerfil(userId: number, file: File): Observable<UsuarioResponse> {
+    const formData: FormData = new FormData();
+    formData.append('file', file, file.name);
+
+    return this.http.post<UsuarioResponse>(
+      `${this.baseUrl}/usuarios/${userId}/foto-perfil`,
+      formData
+    ).pipe(
+      tap(updatedProfile => this._userProfile.set(updatedProfile))
+    );
   }
 
   // PUT - Cambiar contraseña

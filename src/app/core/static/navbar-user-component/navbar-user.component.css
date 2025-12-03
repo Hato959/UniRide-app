@@ -20,26 +20,33 @@
   height: 100%;
   gap: 15px;
 }
-
-.red-square {
+.red-logo-background {
   background-color: #D50100;
   height: 100%;
   width: 90px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  color: white;
-  font-size: 1.5rem;
 }
 
-.pole { font-size: 1rem; opacity: 0.7; }
-.car-icon { font-size: 1.8rem; }
+.logo-link {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-img {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+}
 
 .brand-text-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-left: 10px;
 }
 
 .brand-name {
@@ -102,7 +109,8 @@
 
 @media (max-width: 600px) {
   .brand-name { font-size: 1.4rem; }
-  .red-square { width: 70px; }
+  .logo-img { height: 50px; }
+  .red-logo-background { width: 70px; }
   .icons-area { gap: 15px; }
   .role-label { display: none; }
 }

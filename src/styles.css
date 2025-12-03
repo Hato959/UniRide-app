@@ -10,7 +10,13 @@
     --text-muted: #666666;
     --text-white: #FFFFFF;
 }
+*, *::before, *::after {
+    box-sizing: border-box;
+}
 
+html {
+    overflow-x: hidden;
+}
 body {
     margin: 0;
     padding: 0;
