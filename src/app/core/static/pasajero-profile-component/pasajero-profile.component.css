@@ -1,0 +1,175 @@
+:host {
+  --primary-red: #D50100;
+  --bg-gray: #BFBFBF;
+  --text-dark: #333;
+  display: block;
+  background-color: var(--bg-gray);
+  min-height: 100%;
+}
+.profile-layout {
+  padding: 30px 20px;
+  min-height: calc(100vh - 120px);
+}
+.profile-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.title-main {
+  font-size: 2rem;
+  color: var(--text-dark);
+  margin-bottom: 20px;
+}
+.actions-top {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+/* Botones Superiores */
+.btn-change-role, .btn-edit-profile {
+  background-color: var(--primary-red);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.btn-change-role:hover, .btn-edit-profile:hover { background-color: #b00000; }
+
+/* Grid y Tarjetas */
+.profile-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+.profile-card {
+  background: white;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Perfil Izquierda */
+.profile-info { grid-column: 1 / 2; }
+.user-data { display: flex; gap: 20px; align-items: flex-start; }
+.placeholder-initial {
+  background-color: var(--primary-red);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  font-weight: bold;
+}
+.profile-photo {
+  min-width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary-red);
+}
+.info-block h3 {
+  font-size: 1.6rem;
+  color: var(--primary-red);
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+.info-block p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #555;
+}
+
+/* Preferencias Derecha */
+.preferences-card { grid-column: 2 / 3; }
+.red-title {
+  font-size: 1.5rem;
+  color: var(--primary-red);
+  margin-bottom: 20px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+.pref-text {
+  font-size: 1rem;
+  color: var(--text-dark);
+  line-height: 1.6;
+  min-height: 80px;
+  white-space: pre-wrap;
+}
+.muted-text {
+  color: #888;
+  font-style: italic;
+}
+
+    /* Formulario de Preferencias */
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    resize: vertical;
+    margin-bottom: 10px;
+}
+.error-border { border-color: var(--primary-red); }
+.error-msg { color: var(--primary-red); font-size: 0.8rem; display: block; margin-bottom: 10px;}
+
+/* Acciones del formulario de preferencias */
+.pref-actions {
+    margin-top: 20px;
+    text-align: right;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+.btn-pref-edit {
+    background-color: #eee;
+    color: var(--primary-red);
+    border: 1px solid var(--primary-red);
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.btn-pref-edit:hover {
+    background-color: var(--primary-red);
+    color: white;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border: 1px solid transparent;
+}
+.btn-primary {
+    background-color: var(--primary-red);
+    color: white;
+}
+.btn-primary:hover:not(:disabled) { background-color: #b00000; }
+.btn-primary:disabled { background-color: #ccc; cursor: not-allowed; }
+
+.btn-secondary {
+    background-color: white;
+    border-color: #ccc;
+    color: #555;
+}
+.btn-secondary:hover { background-color: #f0f0f0; }
+
+/* Mensajes */
+.status-message { padding: 10px; border-radius: 5px; text-align: center; font-size: 0.9rem; margin-top: 10px; }
+.status-message.error { background-color: #ffe6e6; color: var(--primary-red); }
+
+
+@media (max-width: 800px) {
+    .profile-cards-grid {
+        grid-template-columns: 1fr;
+    }
+    .profile-info, .preferences-card { grid-column: 1 / -1; }
+}

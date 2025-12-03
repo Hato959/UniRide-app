@@ -1,0 +1,74 @@
+<div class="profile-layout">
+  <div class="profile-container">
+
+    <h2 class="title-main">Mi cuenta</h2>
+    <div class="actions-top">
+      @if (usuario()?.rol === 'PASAJERO' && authService.currentConductorId) {
+        <button routerLink="/rol/cambiar" class="btn-change-role">Cambiar a Conductor</button>
+      }
+      <button routerLink="/perfil/editar" class="btn-edit-profile">Editar Datos Personales</button>
+    </div>
+
+    <div class="profile-cards-grid">
+      <div class="profile-card profile-info">
+        <div class="user-data">
+          @if (usuario()?.fotoPerfilUrl) {
+            <img [src]="usuario()?.fotoPerfilUrl" alt="Foto de perfil" class="profile-photo">
+          } @else {
+            <div class="profile-photo placeholder-initial">{{ getInitialLetter() }}</div>
+          }
+          <div class="info-block">
+
+            <h3>{{ usuario()?.nombre }}</h3>
+            <p><strong>Carrera:</strong> {{ usuario()?.carrera || 'No especificada' }}</p>
+            <p><strong>Correo universitario:</strong> {{ usuario()?.correoInstitucional || 'N/A' }}</p>
+            <p><strong>Distrito:</strong> {{ usuario()?.distrito || 'No especificado' }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-card preferences-card">
+        <h3 class="red-title">Preferencias de Viaje</h3>
+
+        @if (isEditingPreferences()) {
+            <form [formGroup]="preferencesForm" (ngSubmit)="savePreferences()">
+                <textarea
+                    formControlName="preferencias"
+                    rows="4"
+                    placeholder="Ej. 'Solo busco conductores mujeres', 'Me gusta el silencio', 'Pago con Yape al subir'..."
+                    [class.error-border]="isFieldInvalid('preferencias')"></textarea>
+
+                @if (isFieldInvalid('preferencias')) {
+                    <small class="error-msg">Este campo es requerido.</small>
+                }
+
+                @if (prefMessage()) {
+                    <div class="status-message" [class.error]="isPrefError()">
+                        {{ prefMessage() }}
+                    </div>
+                }
+
+                <div class="pref-actions">
+                    <button type="button" class="btn-secondary" (click)="isEditingPreferences.set(false)">Cancelar</button>
+                    <button type="submit" class="btn-primary" [disabled]="preferencesForm.invalid || loadingSave()">
+                        {{ loadingSave() ? 'Guardando...' : 'Guardar' }}
+                    </button>
+                </div>
+            </form>
+        } @else {
+            @if (preferencias()?.preferencias) {
+                <p class="pref-text">{{ preferencias()?.preferencias }}</p>
+            } @else {
+                <p class="pref-text muted-text">No has establecido preferencias de viaje. Pulsa el botón para añadir.</p>
+            }
+
+            <div class="pref-actions">
+                <button class="btn-pref-edit" (click)="editPreferences()">
+                    {{ preferencias()?.preferencias ? 'Editar Preferencias' : 'Añadir Preferencias' }}
+                </button>
+            </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

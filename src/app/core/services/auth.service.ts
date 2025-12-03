@@ -128,6 +128,15 @@ export class AuthService {
     }
   }
 
+  public updatePasajeroId(newId: number): void {
+    const current = this._currentUser();
+    if (current) {
+        const updated = { ...current, pasajeroId: newId };
+        this.storage.setItem('user_session', updated);
+        this._currentUser.set(updated);
+    }
+  }
+
   // 3. GETTERS ÚTILES
   get currentEmail(): string | undefined {
     return this._currentUser()?.correoInstitucional;

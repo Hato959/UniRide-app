@@ -1,0 +1,149 @@
+:host {
+        --primary-red: #D50100;
+        --bg-gray: #BFBFBF;
+        --text-dark: #333;
+        display: block;
+        background-color: var(--bg-gray);
+        min-height: 100%;
+    }
+    .profile-layout {
+      padding: 30px 20px;
+    }
+    .profile-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .title-main {
+      font-size: 2rem;
+      color: var(--text-dark);
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .edit-profile-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 30px;
+      align-items: flex-start;
+    }
+
+    .edit-card {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .card-title {
+        font-size: 1.4rem;
+        color: var(--text-dark);
+        margin-bottom: 25px;
+        font-weight: 500;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+    }
+
+    /* --- FORM CARD --- */
+    .form-card form {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+    .form-group {
+        margin-bottom: -15px;
+    }
+    input {
+      width: 100%;
+      padding: 10px 0;
+      border: none;
+      border-bottom: 1px solid #ccc;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s;
+      color: #555;
+    }
+    input:focus { border-bottom-color: var(--primary-red); }
+    .error-border { border-bottom-color: var(--primary-red); }
+
+    .btn-primary, .btn-cancel {
+        width: 100%;
+        padding: 15px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-top: 10px;
+    }
+    .btn-primary {
+        background-color: var(--primary-red);
+        color: white;
+    }
+    .btn-primary:hover:not(:disabled) { background-color: #b00000; }
+    .btn-primary:disabled { opacity: 0.7; cursor: not-allowed; }
+
+    .btn-cancel {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+    }
+    .btn-cancel:hover { background-color: #555; }
+
+    /* --- PHOTO CARD --- */
+    .photo-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-red);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+    font-weight: bold;
+    border-radius: 50%;
+    }
+    .photo-placeholder img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #f0f0f0;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .btn-change-photo {
+        background-color: var(--primary-red);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+    .btn-change-photo:hover { background-color: #b00000; }
+
+    .alert-error {
+        color: var(--primary-red);
+        text-align: center;
+        font-size: 0.9rem;
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid var(--primary-red);
+        border-radius: 5px;
+    }
+
+    @media (max-width: 800px) {
+        .edit-profile-grid {
+            grid-template-columns: 1fr;
+        }
+        .form-card { order: 2; }
+        .photo-card { order: 1; }
+    }

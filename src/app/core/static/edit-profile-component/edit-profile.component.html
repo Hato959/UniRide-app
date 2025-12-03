@@ -1,0 +1,81 @@
+<div class="profile-layout">
+      <div class="profile-container">
+
+        <h2 class="title-main">Mi cuenta</h2>
+
+        <div class="edit-profile-grid">
+
+          <div class="edit-card form-card">
+            <h3 class="card-title">Información de la cuenta</h3>
+
+            <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <input
+                  type="text"
+                  formControlName="nombre"
+                  placeholder="Nombre completo"
+                  [class.error-border]="isFieldInvalid('nombre')">
+              </div>
+
+              <div class="form-group">
+                <input
+                  type="text"
+                  formControlName="carrera"
+                  placeholder="Carrera cursada"
+                  [class.error-border]="isFieldInvalid('carrera')">
+              </div>
+
+              <div class="form-group">
+                <input
+                  type="text"
+                  formControlName="distrito"
+                  placeholder="Distrito"
+                  [class.error-border]="isFieldInvalid('distrito')">
+              </div>
+
+              <button type="submit" class="btn-primary" [disabled]="editForm.invalid || loading()">
+                {{ loading() ? 'Guardando...' : 'Guardar' }}
+              </button>
+
+              <button type="button" class="btn-cancel" [routerLink]="['/perfil']">
+                Cancelar
+              </button>
+
+            </form>
+          </div>
+
+          <div class="edit-card photo-card">
+            <h3 class="card-title">Foto de perfil de la cuenta</h3>
+
+            <div class="photo-placeholder">
+              @if (usuario()?.fotoPerfilUrl) {
+                <img [src]="usuario()?.fotoPerfilUrl" alt="Foto de perfil actual">
+              } @else {
+                <div class="avatar-placeholder">{{ getInitialLetter() }}</div>
+              }
+            </div>
+            <input
+              type="file"
+              #fileInput
+              (change)="onFileSelected($event)"
+              style="display: none;"
+              accept="image/*">
+            <button
+              type="button"
+              class="btn-change-photo"
+              (click)="fileInput.click()"
+              [disabled]="loadingPhoto()">
+              {{ loadingPhoto() ? 'Subiendo...' : 'Cambiar foto' }}
+            </button>
+            @if (photoMessage()) {
+              <small class="photo-message" [class.error-text]="photoError()">{{ photoMessage() }}</small>
+            }
+          </div>
+
+        </div>
+
+        @if (errorMessage()) {
+            <div class="alert-error">{{ errorMessage() }}</div>
+        }
+      </div>
+    </div>
