@@ -52,6 +52,14 @@ export class TripService {
     );
   }
 
+  // GET - Listar viajes (Endpoint: GET /viajes/listar-viajes)
+  listarViajes(): Observable<ViajeResponse[]> {
+    console.log("entro a `listarViajes()`");
+    return this.http.get<ViajeResponse[]>(`${this.apiUrl}/listar-viajes`, {
+      headers: this.getAuthHeaders()
+    });
+  }
+
   // DELETE - Eliminar (Endpoint: DELETE /viajes/{id})
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`, {

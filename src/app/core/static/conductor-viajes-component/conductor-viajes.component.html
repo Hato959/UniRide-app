@@ -1,0 +1,28 @@
+<app-navbar-user></app-navbar-user>
+
+<div class="viajes-layout">
+  <h2>Mis viajes publicados</h2>
+
+  @if (loading) {
+    <p>Cargando viajes...</p>
+  } @else if (errorMessage) {
+    <div class="status error">{{ errorMessage }}</div>
+  } @else if (!viajes.length) {
+    <p>No tienes viajes publicados.</p>
+  } @else {
+    <div class="viajes-grid">
+      @for (viaje of viajes; track viaje.idViaje) {
+        <div class="viaje-card">
+          <div class="header">
+            <div class="ruta">{{ viaje.origen }} → {{ viaje.destino }}</div>
+            <div class="fecha">{{ viaje.fecha }} | {{ viaje.hora }}</div>
+          </div>
+          <div class="detalle">
+            <span>Asientos: {{ viaje.asientosDisponibles }}</span>
+            <span>Recurrente: {{ viaje.recurrente ? 'Sí' : 'No' }}</span>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

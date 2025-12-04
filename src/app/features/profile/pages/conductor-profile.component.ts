@@ -29,4 +29,8 @@ export class ConductorProfileComponent {
   goToRegistroVehiculo(): void {
     this.router.navigate(['/driver_home', 'registro_vehiculo']);
   }
+
+  goToViajes(): void {
+    this.router.navigate(['/driver_home', 'conductor_viajes']);
+  }
 }

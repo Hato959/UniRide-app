@@ -44,5 +44,9 @@ export const PROFILE_ROUTES: Routes = [
   {
     path: 'registro_vehiculo',
     loadComponent: () => import('./pages/conductor-vehiculo.component').then(m => m.ConductorVehiculoComponent)
+  },
+  {
+    path: 'conductor_viajes',
+    loadComponent: () => import('./pages/conductor-viajes.component').then(m => m.ConductorViajesComponent)
   }
 ];
