@@ -1,0 +1,47 @@
+<app-navbar-user></app-navbar-user>
+
+<div class="crear-viaje">
+  <div class="mapa"></div>
+
+  <div class="panel">
+    <h2>Publicar nuevo viaje</h2>
+    <form [formGroup]="form" (ngSubmit)="publicar()" class="formulario">
+      <label>
+        Origen
+        <input type="text" formControlName="origen" placeholder="Punto de partida">
+      </label>
+
+      <label>
+        Destino
+        <input type="text" formControlName="destino" placeholder="Destino">
+      </label>
+
+      <div class="grid-2">
+        <label>
+          Fecha
+          <input type="date" formControlName="fecha">
+        </label>
+        <label>
+          Hora
+          <input type="time" formControlName="hora">
+        </label>
+      </div>
+
+      <label>
+        Asientos disponibles
+        <input type="number" min="1" formControlName="asientos">
+      </label>
+
+      <label class="check-row">
+        <input type="checkbox" formControlName="recurrente">
+        Recurrente
+      </label>
+
+      <button type="submit" class="btn-primary">Publicar viaje</button>
+
+      @if (statusMessage) {
+        <div class="status" [class.error]="isError">{{ statusMessage }}</div>
+      }
+    </form>
+  </div>
+</div>

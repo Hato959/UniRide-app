@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AuthService } from './../../../core/services/auth.service';
@@ -8,11 +8,12 @@ import { UserService } from './../../../core/services/user.service';
 import { PasajeroService } from './../../../core/services/passenger.service';
 import { UsuarioResponse } from './../../../core/models/user.model';
 import { PasajeroResponse, PasajeroRequest } from './../../../core/models/passenger.model';
+import { NavbarUserComponent } from './../../../shared/components/navbar-user.component';
 
 @Component({
   selector: 'app-pasajero-profile',
   standalone: true,
-  imports: [CommonModule, RouterLink, ReactiveFormsModule],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule, NavbarUserComponent],
   templateUrl: '../../../core/static/pasajero-profile-component/pasajero-profile.component.html',
   styleUrl: '../../../core/static/pasajero-profile-component/pasajero-profile.component.css'
 })
@@ -26,6 +27,11 @@ export class PasajeroProfileComponent implements OnInit {
   loadingSave = signal(false);
   prefMessage = signal<string | null>(null);
   isPrefError = signal(false);
+
+  constructor(private router: Router) {
+    console.log('Router config:', this.router.config);
+    console.log('Router paths:', this.router.config.map(r => r.path));
+  }
 
 
   // Formularios
@@ -80,10 +86,7 @@ export class PasajeroProfileComponent implements OnInit {
   }
 
   editPreferences(): void {
-    const currentPrefs = this.preferencias()?.preferencias || '';
-    this.preferencesForm.patchValue({ preferencias: currentPrefs });
-    this.isEditingPreferences.set(true);
-    this.prefMessage.set(null);
+
   }
 
   savePreferences(): void {

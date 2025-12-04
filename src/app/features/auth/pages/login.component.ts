@@ -15,7 +15,7 @@ import { LoginRequest } from '../../../core/models/auth.model';
 export class LoginComponent {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
-  private router = inject(Router);
+  //private router = inject(Router);
 
   loading = signal(false);
   errorMessage = signal('');
@@ -30,6 +30,11 @@ export class LoginComponent {
     return !!(control?.invalid && control?.touched);
   }
 
+  constructor(private router: Router) {
+    console.log('Router config:', this.router.config);
+    console.log('Router paths:', this.router.config.map(r => r.path));
+  }
+
   onSubmit() {
     if (this.loginForm.valid) {
       this.loading.set(true);
@@ -41,8 +46,19 @@ export class LoginComponent {
       };
 
       this.authService.login(credentials).subscribe({
-        next: () => {
-          //this.router.navigate(['/home']);
+        next: (perfil) => {
+          if (!perfil?.rol) {
+            this.router.navigate(['/home']);
+            return;
+          }
+
+          if (perfil.rol === 'CONDUCTOR') {
+            this.router.navigate(['/driver_home', 'conductor_perfil']);
+          } else if (perfil.rol === 'PASAJERO') {
+            this.router.navigate(['/user_home', 'perfil_usuario']);
+          } else {
+            this.router.navigate(['/home']);
+          }
         },
         error: () => {
           console.log('Attempting login with credentials:', credentials); // debugging

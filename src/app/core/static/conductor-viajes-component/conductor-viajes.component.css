@@ -1,0 +1,69 @@
+:host {
+  display: block;
+  padding: 30px 20px;
+  background: #f8f9fa;
+  min-height: calc(100vh - 70px);
+}
+
+.viajes-layout {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.viajes-layout h2 {
+  margin: 0 0 20px;
+  color: #D50100;
+}
+
+.viajes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.viaje-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.ruta {
+  font-weight: 700;
+  color: #333;
+}
+
+.fecha {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.detalle {
+  display: flex;
+  justify-content: space-between;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.status {
+  padding: 10px;
+  border-radius: 8px;
+  background: #e8f5e9;
+  color: #2e7d32;
+  font-weight: 600;
+}
+
+.status.error {
+  background: #ffebee;
+  color: #c62828;
+}

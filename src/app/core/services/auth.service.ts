@@ -58,10 +58,21 @@ export class AuthService {
         // Actualizamos la sesion con el estado de verificado
         this.updateVerificationStatus(perfil.verificado);
 
-        if (perfil.verificado) {
-          this.router.navigate(['/home']);
-        } else {
+        if (!perfil.verificado) {
           this.router.navigate(['/auth/validation']);
+          return;
+        }
+
+        // RedirecciA3n segAon el rol
+        switch (perfil.rol) {
+          case 'CONDUCTOR':
+            this.router.navigate(['/perfil', 'conductor_perfil']);
+            break;
+          case 'PASAJERO':
+            this.router.navigate(['/perfil', 'perfil_usuario']);
+            break;
+          default:
+            this.router.navigate(['/home']);
         }
       })
     );
