@@ -3,7 +3,7 @@ import { TripStatusComponent } from './features/trip-status/trip-status';
 import { PasengerVizComponent } from './features/pasenger-viz/pasenger-viz';
 import { DriverVizComponent } from './features/driver-viz/driver-viz';
 
-<<<<<<< HEAD
+
 // Guards
 import { authGuard } from './core/guards/auth.guard';
 import { driverOnboardingGuard } from './core/guards/driver-onboarding.guard';
@@ -77,7 +77,7 @@ export const routes: Routes = [
     component: AuthLayoutComponent,
     canActivate: [authGuard, driverOnboardingGuard],
     children: [
-        // 🆕 RUTAS DE VISTA FINAL CON ROLE GUARD
+
         {
              path: 'pasajero', // /perfil/pasajero
              data: { expectedRole: 'PASAJERO' as RolActivo }, // Definimos el rol esperado
@@ -136,11 +136,4 @@ export const routes: Routes = [
   },
 
   { path: '**', redirectTo: 'home' }
-=======
-export const routes: Routes = [
-  { path: 'trip', component: TripStatusComponent },
-  { path: 'pasenger-viz', component: PasengerVizComponent },
-  { path: 'driver-viz', component: DriverVizComponent },
-  { path: '', redirectTo: 'driver-viz', pathMatch: 'full' },
->>>>>>> f3842837861630ab7c40a73c9efe52dd6735a640
 ];
