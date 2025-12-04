@@ -1,0 +1,26 @@
+<app-navbar-user></app-navbar-user>
+
+<div class="register-layout">
+  <div class="register-card">
+    <h2>Registro como conductor</h2>
+    <p class="subtitle">Completa tus datos para habilitar tu perfil de conductor.</p>
+
+    <form [formGroup]="form" (ngSubmit)="registrar()" class="formulario">
+      <label>
+        Licencia de Conducir
+        <input type="text" formControlName="licenciaConducir" placeholder="Ingresa tu número de licencia">
+      </label>
+
+      <label>
+        Experiencia (años)
+        <input type="number" min="0" formControlName="experienciaAnios" placeholder="Años de experiencia">
+      </label>
+
+      <button type="submit" class="btn-primary">Registrar</button>
+
+      @if (statusMessage) {
+        <div class="status" [class.error]="isError">{{ statusMessage }}</div>
+      }
+    </form>
+  </div>
+</div>

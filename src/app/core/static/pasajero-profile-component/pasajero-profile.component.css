@@ -166,6 +166,11 @@ textarea {
 .status-message { padding: 10px; border-radius: 5px; text-align: center; font-size: 0.9rem; margin-top: 10px; }
 .status-message.error { background-color: #ffe6e6; color: var(--primary-red); }
 
+.actions-bottom {
+    margin-top: 40px;
+    text-align: center;
+}
+
 
 @media (max-width: 800px) {
     .profile-cards-grid {

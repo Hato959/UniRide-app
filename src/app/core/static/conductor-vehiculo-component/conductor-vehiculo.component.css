@@ -1,0 +1,87 @@
+:host {
+  display: block;
+  padding: 30px 20px;
+  background: #f8f9fa;
+  min-height: calc(100vh - 70px);
+}
+
+.vehiculo-layout {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.vehiculo-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.vehiculo-card h2 {
+  margin: 0;
+  color: #D50100;
+}
+
+.subtitle {
+  margin: 0;
+  color: #555;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+  color: #444;
+}
+
+input[type="text"] {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus {
+  border-color: #D50100;
+  box-shadow: 0 0 0 3px rgba(213, 1, 0, 0.12);
+  outline: none;
+}
+
+.btn-primary {
+  background: #D50100;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background: #b00000;
+}
+
+.status {
+  padding: 10px;
+  border-radius: 8px;
+  background: #e8f5e9;
+  color: #2e7d32;
+  font-weight: 600;
+}
+
+.status.error {
+  background: #ffebee;
+  color: #c62828;
+}

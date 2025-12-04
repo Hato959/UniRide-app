@@ -1,3 +1,5 @@
+<app-navbar-user></app-navbar-user>
+
 <div class="profile-layout">
   <div class="profile-container">
 
@@ -6,7 +8,8 @@
       @if (usuario()?.rol === 'PASAJERO' && authService.currentConductorId) {
         <button routerLink="/rol/cambiar" class="btn-change-role">Cambiar a Conductor</button>
       }
-      <button routerLink="/perfil/editar" class="btn-edit-profile">Editar Datos Personales</button>
+      <button [routerLink]="['/perfil','usuario_viaje']" class="btn-change-role">Mis viajes</button>
+      <button [routerLink]="['/perfil','editar_perfil_usuario']" class="btn-edit-profile">Editar Datos Personales</button>
     </div>
 
     <div class="profile-cards-grid">
@@ -69,6 +72,10 @@
             </div>
         }
       </div>
+    </div>
+
+    <div class="actions-bottom">
+      <button [routerLink]="['/perfil','buscar_viaje']" class="btn-primary">Buscar viaje</button>
     </div>
   </div>
 </div>

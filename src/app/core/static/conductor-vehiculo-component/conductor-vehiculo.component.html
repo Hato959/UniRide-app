@@ -1,0 +1,33 @@
+<app-navbar-user></app-navbar-user>
+
+<div class="vehiculo-layout">
+  <div class="vehiculo-card">
+    <h2>Registrar vehículo</h2>
+    <p class="subtitle">Completa los datos de tu auto para asociarlo a tus viajes.</p>
+
+    <form [formGroup]="form" (ngSubmit)="registrarVehiculo()" class="formulario">
+      <label>
+        Color
+        <input type="text" formControlName="color" placeholder="Ej. Rojo">
+      </label>
+      <label>
+        Marca
+        <input type="text" formControlName="marca" placeholder="Ej. Toyota">
+      </label>
+      <label>
+        Modelo
+        <input type="text" formControlName="modelo" placeholder="Ej. Corolla">
+      </label>
+      <label>
+        Placa
+        <input type="text" formControlName="placa" placeholder="Ej. ABC-123">
+      </label>
+
+      <button type="submit" class="btn-primary">Registrar vehículo</button>
+
+      @if (statusMessage) {
+        <div class="status" [class.error]="isError">{{ statusMessage }}</div>
+      }
+    </form>
+  </div>
+</div>

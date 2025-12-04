@@ -51,7 +51,7 @@ export class RegisterComponent {
     this.authService.register(request).subscribe({
       next: () => {
         // Redirigir al dashboard o home tras registro exitoso
-        //this.router.navigate(['/home']);
+        this.router.navigate(['/home']);
       },
       error: (err) => {
         this.errorMessage.set('Error al registrar. Verifica tus datos.');
