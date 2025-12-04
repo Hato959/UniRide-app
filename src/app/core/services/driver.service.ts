@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { ConductorRegisterRequest, VehiculoRegisterRequest, VehiculoResponse, ConductorResponse, ConductorInfoResponse } from '../models/driver.model';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'

@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from './../../../core/services/auth.service';
 import { UserService } from './../../../core/services/user.service';
 import { DriverService } from './../../../core/services/driver.service';
@@ -78,29 +78,99 @@ import { PasajeroService } from './../../../core/services/passenger.service';
         .actions-top-bar { grid-template-columns: 1fr 2fr 1fr; }
         .title-main { grid-column: 2; }
     }
+    :host {
+  --primary-red: #D50100;
+  --bg-gray: #f8f9fa;
+  display: block;
+  background: var(--bg-gray);
+  min-height: 100vh;
+}
+
+.profile-layout {
+  padding: 30px 20px;
+}
+
+.profile-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.title-main {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.driver-name {
+  margin: 0 0 20px;
+  color: #555;
+  font-weight: 600;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card h3 {
+  margin: 0;
+  color: var(--primary-red);
+}
+
+.card p {
+  margin: 0;
+  color: #555;
+}
+
+.highlight {
+  border: 1px solid var(--primary-red);
+}
+
+.btn-primary,
+.btn-secondary {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background-color 0.2s, color 0.2s;
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn-primary {
+  background: var(--primary-red);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #b00000;
+}
+
+.btn-secondary {
+  background: #eee;
+  color: var(--primary-red);
+}
+
+.btn-secondary:hover {
+  background: var(--primary-red);
+  color: #fff;
+}
   `]
 })
 export class ConductorProfileComponent implements OnInit {
-  constructor(private router: Router, private authService: AuthService) {}
 
-  get driverName(): string {
-    return this.authService.currentUser()?.nombre ?? 'Conductor';
-  }
-
-  goToCrearViaje(): void {
-    this.router.navigate(['/driver_home', 'crear_viaje_conductor']);
-  }
-
-  goToRegistroConductor(): void {
-    this.router.navigate(['/driver_home', 'registro_conductor']);
-  }
-
-  goToRegistroVehiculo(): void {
-    this.router.navigate(['/driver_home', 'registro_vehiculo']);
-  }
-
-  goToViajes(): void {
-    this.router.navigate(['/driver_home', 'conductor_viajes']);
   usuario = signal<UsuarioResponse | null>(null);
   conductor = signal<ConductorResponse | null>(null);
   vehiculo = signal<VehiculoResponse | null>(null);
@@ -163,4 +233,26 @@ export class ConductorProfileComponent implements OnInit {
         this.isLoading.set(false);
     }
   }
+
+  constructor(private router: Router, authService: AuthService) {}
+
+  get driverName(): string {
+    return this.authService.currentUser()?.nombre ?? 'Conductor';
+  }
+
+  goToCrearViaje(): void {
+    this.router.navigate(['/driver_home', 'crear_viaje_conductor']);
+  }
+
+  goToRegistroConductor(): void {
+    this.router.navigate(['/driver_home', 'registro_conductor']);
+  }
+
+  goToRegistroVehiculo(): void {
+    this.router.navigate(['/driver_home', 'registro_vehiculo']);
+  }
+
+  goToViajes(): void {
+    this.router.navigate(['/driver_home', 'conductor_viajes']);
+}
 }

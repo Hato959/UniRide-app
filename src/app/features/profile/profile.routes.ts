@@ -43,6 +43,8 @@ export const PROFILE_ROUTES: Routes = [
   {
     path: 'registro-vehiculo', // Ruta: /perfil/registro-vehiculo
     component: VehicleDataComponent
+  },
+  {
     path: 'perfil_usuario',
     loadComponent: () => import('./pages/pasajero-profile.component').then(m => m.PasajeroProfileComponent)
   },
