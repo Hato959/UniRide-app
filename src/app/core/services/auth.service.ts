@@ -59,7 +59,7 @@ export class AuthService {
         this.updateVerificationStatus(perfil.verificado);
 
         if (perfil.verificado) {
-          this.router.navigate(['/home']);
+          this.navigateToProfile(perfil.rol)
         } else {
           this.router.navigate(['/auth/validation']);
         }
@@ -76,6 +76,16 @@ export class AuthService {
         this.router.navigate(['/auth/validation']);
       })
     );
+  }
+
+  public navigateToProfile(rol: string): void {
+      if (rol === 'PASAJERO') {
+          this.router.navigate(['/perfil/pasajero']);
+      } else if (rol === 'CONDUCTOR') {
+          this.router.navigate(['/perfil/conductor']);
+      } else {
+          this.router.navigate(['/home']);
+      };
   }
 
   logout(): void {
@@ -108,7 +118,7 @@ export class AuthService {
     this._isAuthenticated.set(true);
   }
 
-  private updateVerificationStatus(status: boolean) {
+  public updateVerificationStatus(status: boolean) {
     const current = this._currentUser();
     if (current) {
       const updated = { ...current, verificado: status };
@@ -132,6 +142,14 @@ export class AuthService {
     const current = this._currentUser();
     if (current) {
         const updated = { ...current, pasajeroId: newId };
+        this.storage.setItem('user_session', updated);
+        this._currentUser.set(updated);
+    }
+  }
+  public updateConductorId(newId: number): void {
+    const current = this._currentUser();
+    if (current) {
+        const updated = { ...current, conductorId: newId };
         this.storage.setItem('user_session', updated);
         this._currentUser.set(updated);
     }

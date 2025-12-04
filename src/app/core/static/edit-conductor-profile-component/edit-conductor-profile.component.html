@@ -1,0 +1,100 @@
+<div class="profile-layout">
+  <div class="profile-container">
+
+    <h2 class="title-main">Mi cuenta</h2>
+
+    <div class="edit-profile-grid-driver">
+
+      <!-- CARD 1: INFORMACIÓN DE LA CUENTA (USUARIO) -->
+      <div class="edit-card form-card user-info-card">
+        <h3 class="card-title">Información de la cuenta</h3>
+        <form [formGroup]="userForm">
+          <div class="form-group">
+            <input type="text" formControlName="nombre" placeholder="Nombre completo" [class.error-border]="isFieldInvalid(userForm, 'nombre')">
+          </div>
+          <div class="form-group">
+            <input type="text" formControlName="carrera" placeholder="Carrera cursada" [class.error-border]="isFieldInvalid(userForm, 'carrera')">
+          </div>
+          <div class="form-group">
+            <input type="text" formControlName="distrito" placeholder="Distrito" [class.error-border]="isFieldInvalid(userForm, 'distrito')">
+          </div>
+
+          <!-- Licencia y Experiencia (Campos del Conductor) -->
+          <h3 class="card-title sub-title">Datos de Conducción</h3>
+          <div class="form-group">
+            <input type="text" formControlName="licenciaConducir" placeholder="Licencia de Conducir" [class.error-border]="isFieldInvalid(userForm, 'licenciaConducir')">
+          </div>
+          <div class="form-group">
+            <input type="number" formControlName="experienciaAnios" placeholder="Años de Experiencia" min="0" [class.error-border]="isFieldInvalid(userForm, 'experienciaAnios')">
+          </div>
+
+          <button type="button" (click)="onSubmit()" class="btn-primary" [disabled]="userForm.invalid || loading()">
+            {{ loading() ? 'Guardando...' : 'Guardar Información' }}
+          </button>
+
+          <button type="button" class="btn-cancel" [routerLink]="['/perfil/conductor']">
+            Cancelar
+          </button>
+        </form>
+      </div>
+
+      <!-- CARD 2: INFORMACIÓN DEL VEHÍCULO -->
+      <div class="edit-card form-card vehicle-info-card">
+        <h3 class="card-title">Información del Vehículo</h3>
+        <form [formGroup]="vehicleForm">
+          <div class="form-group">
+            <input type="text" formControlName="placa" placeholder="Placa" [class.error-border]="isFieldInvalid(vehicleForm, 'placa')">
+          </div>
+          <div class="form-group">
+            <input type="text" formControlName="marca" placeholder="Marca" [class.error-border]="isFieldInvalid(vehicleForm, 'marca')">
+          </div>
+          <div class="form-group">
+            <input type="text" formControlName="modelo" placeholder="Modelo" [class.error-border]="isFieldInvalid(vehicleForm, 'modelo')">
+          </div>
+          <div class="form-group">
+            <input type="text" formControlName="color" placeholder="Color" [class.error-border]="isFieldInvalid(vehicleForm, 'color')">
+          </div>
+          <button type="button" (click)="onVehicleSubmit()" class="btn-primary" [disabled]="vehicleForm.invalid || loadingVehicle()">
+            {{ loadingVehicle() ? 'Actualizando...' : 'Actualizar Vehículo' }}
+          </button>
+        </form>
+      </div>
+
+      <!-- CARD 3: FOTO DE PERFIL Y VEHÍCULO -->
+      <div class="edit-card photo-upload-card">
+            <h3 class="card-title">Foto de perfil de la cuenta</h3>
+            <div class="photo-placeholder">
+              @if (usuario()?.fotoPerfilUrl) {
+                <img [src]="usuario()?.fotoPerfilUrl" alt="Foto de perfil actual">
+              } @else {
+                <div class="avatar-placeholder">{{ getInitialLetter() }}</div>
+              }
+            </div>
+            <input type="file" #fileInput (change)="onFileSelected($event)" style="display: none;" accept="image/*">
+            <button type="button" class="btn-change-photo" (click)="fileInput.click()" [disabled]="loadingPhoto()">
+              {{ loadingPhoto() ? 'Subiendo...' : 'Cambiar foto' }}
+            </button>
+
+            <!-- Foto del Vehículo -->
+            <h3 class="card-title sub-title mt-8">Foto del vehículo</h3>
+            <div class="vehicle-photo-placeholder">
+                <!-- 🆕 CAMBIO: Usar la URL de la foto del vehículo o un placeholder local -->
+                @if (vehiculo()?.fotoVehiculoUrl) {
+                    <img [src]="vehiculo()?.fotoVehiculoUrl" alt="Foto del vehículo actual">
+                } @else {
+                    <img src="assets/images/placeholder-car.png" alt="Placeholder de vehículo">
+                }
+            </div>
+            <input type="file" #vehicleFileInput (change)="onVehiclePhotoSelected($event)" style="display: none;" accept="image/*">
+            <button type="button" class="btn-change-photo" (click)="vehicleFileInput.click()">
+              Cambiar foto
+            </button>
+
+      </div>
+    </div>
+
+    @if (errorMessage()) {
+        <div class="alert-error">{{ errorMessage() }}</div>
+    }
+  </div>
+</div>

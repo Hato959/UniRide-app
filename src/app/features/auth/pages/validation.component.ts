@@ -132,8 +132,14 @@ export class ValidationComponent implements OnInit {
     this.validationService.verificarUsuario(request).subscribe({
       next: (res) => {
         this.showMessage('¡Validación exitosa! Redirigiendo...', false);
+        this.authService.updateVerificationStatus(true);
+        const rol = this.authService.currentUser()?.rol;
         setTimeout(() => {
-          this.router.navigate(['/home']);
+          if (rol) {
+             this.authService.navigateToProfile(rol);
+          } else {
+             this.router.navigate(['/home']);
+          }
         }, 2000);
       },
       error: (err) => {
@@ -141,6 +147,7 @@ export class ValidationComponent implements OnInit {
         const msg = err.error?.message || err.error || 'Verificación fallida. Código o DNI incorrectos.';
         this.showMessage(msg, true);
         this.loadingVerify.set(false);
+        if (isEmailDisabled) emailControl?.disable();
       }
     });
   }

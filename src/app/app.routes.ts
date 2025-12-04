@@ -2,6 +2,9 @@ import { Routes } from '@angular/router';
 
 // Guards
 import { authGuard } from './core/guards/auth.guard';
+import { driverOnboardingGuard } from './core/guards/driver-onboarding.guard';
+import { roleGuard } from './core/guards/role.guard';
+import { RolActivo } from './core/models/enums.model';
 
 // Layouts
 import { LandingLayoutComponent } from './shared/layouts/landing-layout';
@@ -36,20 +39,68 @@ export const routes: Routes = [
     loadChildren: () => import('./features/auth/auth.routes').then(m => m.AUTH_ROUTES)
   },
 
-  // 3. ZONA PRIVADA / APP INTERNA (Auth Layout)
+  // 3. ZONA PRIVADA/OBLIGATORIA (Rutas de Onboarding y Edición)
+  // Rutas que solo requieren estar autenticadas, pero no necesariamente "Completas"
+  {
+    path: 'perfil',
+    component: AuthLayoutComponent,
+    canActivate: [authGuard, driverOnboardingGuard],
+    children: [
+        // 🆕 RUTAS DE VISTA FINAL CON ROLE GUARD
+        {
+             path: 'pasajero', // /perfil/pasajero
+             data: { expectedRole: 'PASAJERO' as RolActivo }, // Definimos el rol esperado
+             canActivate: [roleGuard], // ⬅️ APLICAMOS RoleGuard
+             loadComponent: () => import('./features/profile/pages/pasajero-profile.component').then(m => m.PasajeroProfileComponent)
+        },
+        {
+             path: 'conductor', // /perfil/conductor
+             data: { expectedRole: 'CONDUCTOR' as RolActivo }, // Definimos el rol esperado
+             canActivate: [roleGuard], // ⬅️ APLICAMOS RoleGuard
+             loadComponent: () => import('./features/profile/pages/conductor-profile.component').then(m => m.ConductorProfileComponent)
+        },
+
+        // Rutas de Edición (Dejamos solo la edición de datos personales)
+        {
+            path: 'editar', // /perfil/editar
+            loadComponent: () => import('./features/profile/pages/edit-profile.component').then(m => m.EditProfileComponent)
+        },
+        // ... (Rutas de Onboarding y Edición Conductor)
+        {
+            path: 'registro-licencia',
+            loadComponent: () => import('./features/profile/pages/driver-onboarding-paso1.component').then(m => m.DriverOnboardingPaso1Component)
+        },
+        {
+            path: 'registro-vehiculo',
+            loadComponent: () => import('./features/profile/pages/vehicle-data.component').then(m => m.VehicleDataComponent)
+        },
+
+        // Rutas de Edición Específica (Para conductor)
+        {
+            path: 'editar/conductor',
+            canActivate: [roleGuard], // ⬅️ Aplicamos RoleGuard a la edición de conductor
+            data: { expectedRole: 'CONDUCTOR' as RolActivo },
+            loadComponent: () => import('./features/profile/pages/edit-conductor-profile.component').then(m => m.EditConductorProfileComponent)
+        },
+
+        // Redirección por defecto dentro de /perfil
+        { path: '', redirectTo: 'pasajero', pathMatch: 'full' }
+    ]
+  },
+
+  // 4. ZONA INTERNA PRINCIPAL - [SIN CAMBIOS RELEVANTES]
   {
     path: '',
-    component: AuthLayoutComponent, // Este tiene el NavbarUser (con menú de conductor/pasajero)
-    canActivate: [authGuard],       // Protege todas las rutas hijas
+    component: AuthLayoutComponent,
+    canActivate: [authGuard, driverOnboardingGuard],
     children: [
-      {
-          path: 'perfil',
-          loadChildren: () => import('./features/profile/profile.routes').then(m => m.PROFILE_ROUTES)
-      },
-
-
-
-        { path: '', redirectTo: 'home', pathMatch: 'full' }
+        { path: '', redirectTo: 'perfil/pasajero', pathMatch: 'full' },
+        {
+            path: 'home',
+            loadChildren: () => import('./features/home/home.routes').then(m => m.HOME_ROUTES)
+        },
+        // 🆕 Ruta de Fallback para Cambio de Rol (Si usas el botón Cambiar Rol)
+        { path: 'rol/cambiar', redirectTo: 'perfil/pasajero' }
     ]
   },
 

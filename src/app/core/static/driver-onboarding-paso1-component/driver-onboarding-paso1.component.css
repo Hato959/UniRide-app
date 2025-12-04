@@ -1,0 +1,57 @@
+/* 🆕 ESTILOS PARA CENTRAR LA TARJETA (Copiado de vehicle-data.component.ts) */
+    .onboarding-layout {
+      min-height: calc(100vh - 70px);
+      background-color: #BFBFBF;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 50px 20px;
+    }
+    .form-card-wrapper {
+        width: 100%;
+        max-width: 500px;
+    }
+    .onboarding-card {
+        background: white;
+        border-radius: 15px;
+        padding: 40px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    .title-main {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 30px;
+        color: #333;
+    }
+    .form-group {
+        margin-bottom: 25px;
+    }
+    /* Estilos de input heredados de edit-profile.component.css */
+    input {
+      border: none;
+      border-bottom: 1px solid #ccc; /* Aseguramos que se aplique la línea */
+      padding: 10px 0;
+      font-size: 1rem;
+      width: 100%; /* Aseguramos que ocupe todo el ancho */
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    input:focus { border-bottom-color: #D50100; }
+    .error-border { border-bottom-color: #D50100; }
+
+    .btn-confirm {
+        background-color: #D50100;
+        color: white;
+        border: none;
+        padding: 15px 0;
+        width: 100%;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background 0.3s;
+        margin-top: 20px;
+    }
+    .btn-confirm:hover:not(:disabled) { background-color: #b00000; }
+    .alert-error { text-align: center; margin-top: 15px; }
+    .error-text { color: #D50100; font-size: 0.8rem; margin-top: 5px; display: block; }

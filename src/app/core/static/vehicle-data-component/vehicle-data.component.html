@@ -1,0 +1,50 @@
+<div class="onboarding-layout">
+      <div class="form-card-wrapper">
+        <div class="onboarding-card">
+          <h2 class="title-main">Datos del vehículo</h2>
+          <form [formGroup]="vehicleForm" (ngSubmit)="onSubmit()">
+
+            <div class="form-group">
+              <input
+                type="text"
+                formControlName="placa"
+                placeholder="Placa (Ej. A1B-234)"
+                maxlength="7"
+                [class.error-border]="isFieldInvalid('placa')">
+            </div>
+            @if (isFieldInvalid('placa')) {
+                <small class="error-text">Placa requerida (Ej. A1B-234)</small>
+            }
+
+
+            <div class="form-group">
+              <input
+                type="text"
+                formControlName="marca"
+                placeholder="Marca (Ej. Toyota)"
+                [class.error-border]="isFieldInvalid('marca')">
+            </div>
+
+            <div class="form-group">
+              <input
+                type="text"
+                formControlName="modelo"
+                placeholder="Modelo (Ej. Yaris)"
+                [class.error-border]="isFieldInvalid('modelo')">
+            </div>
+
+            <div class="form-group">
+              <input
+                type="text"
+                formControlName="color"
+                placeholder="Color (Ej. Negro)"
+                [class.error-border]="isFieldInvalid('color')">
+            </div>
+
+            <button type="submit" class="btn-confirm" [disabled]="vehicleForm.invalid || loading()">
+              {{ loading() ? 'Registrando...' : 'Confirmar' }}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>

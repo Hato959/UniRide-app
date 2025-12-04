@@ -40,4 +40,5 @@ export interface VehiculoResponse {
   placa: string;
   modelo: string;
   color: string;
+  fotoVehiculoUrl?: string;
 }
