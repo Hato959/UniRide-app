@@ -1,0 +1,35 @@
+:host {
+  display: block;
+  padding: 30px 20px;
+  background-color: #f8f9fa;
+  min-height: calc(100vh - 70px);
+}
+
+.usuario-viaje {
+  max-width: 900px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.usuario-viaje h2 {
+  margin-top: 0;
+  color: #D50100;
+}
+
+.placeholder {
+  color: #555;
+  margin: 15px 0 25px;
+}
+
+.back-link {
+  color: #D50100;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}

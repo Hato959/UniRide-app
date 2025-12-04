@@ -61,3 +61,43 @@
         </div>
       </div>
     </div>
+<app-navbar-user></app-navbar-user>
+
+<div class="profile-layout">
+  <div class="profile-container">
+    <h2 class="title-main">Mi cuenta de conductor</h2>
+    <p class="driver-name">Hola, {{ driverName }}</p>
+
+    <div class="cards-grid">
+      <div class="card highlight">
+        <h3>Estado de cuenta</h3>
+        <p>Configura tus datos como conductor y mantén tu perfil al día.</p>
+        <a routerLink="/perfil/editar_perfil_usuario" class="btn-primary">Editar perfil</a>
+      </div>
+
+      <div class="card">
+        <h3>Publicar nuevo viaje</h3>
+        <p>Crea un viaje para que los pasajeros puedan reservar.</p>
+        <button class="btn-secondary" type="button" (click)="goToCrearViaje()">Crear viaje</button>
+      </div>
+
+      <div class="card">
+        <h3>Mis viajes publicados</h3>
+        <p>Gestiona tus viajes y revisa las reservas de pasajeros.</p>
+        <button class="btn-secondary" type="button" (click)="goToViajes()">Ver viajes</button>
+      </div>
+
+      <div class="card">
+        <h3>Registrarme como conductor</h3>
+        <p>Completa los datos de tu licencia y experiencia.</p>
+        <button class="btn-secondary" type="button" (click)="goToRegistroConductor()">Ir al registro</button>
+      </div>
+
+      <div class="card">
+        <h3>Registrar mi vehículo</h3>
+        <p>Agrega la información de tu auto para publicarlo en tus viajes.</p>
+        <button class="btn-secondary" type="button" (click)="goToRegistroVehiculo()">Registrar vehículo</button>
+      </div>
+    </div>
+  </div>
+</div>

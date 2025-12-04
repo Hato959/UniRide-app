@@ -1,0 +1,18 @@
+<div class="buscar-viaje">
+  <div class="mapa"></div>
+
+  <div class="panel">
+    <h2>Buscar viaje</h2>
+    <form [formGroup]="form" (ngSubmit)="buscar()" class="formulario">
+      <label>
+        Origen
+        <input type="text" formControlName="origen" placeholder="Ingresa tu punto de partida">
+      </label>
+      <label>
+        Destino
+        <input type="text" formControlName="destino" placeholder="Ingresa tu destino">
+      </label>
+      <button type="submit" class="btn-primary">Buscar</button>
+    </form>
+  </div>
+</div>

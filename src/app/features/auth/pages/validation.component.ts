@@ -30,7 +30,7 @@ export class ValidationComponent implements OnInit {
   validationForm: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     dni: ['', [Validators.required, AuthValidators.peruvianDNI()]],
-    codigo: ['', [Validators.required, Validators.minLength(6)]]
+    //codigo: ['', [Validators.required, Validators.minLength(6)]]
   });
 
   ngOnInit() {

@@ -62,6 +62,19 @@ export class AuthService {
           this.navigateToProfile(perfil.rol)
         } else {
           this.router.navigate(['/auth/validation']);
+          return;
+        }
+
+        // RedirecciA3n segAon el rol
+        switch (perfil.rol) {
+          case 'CONDUCTOR':
+            this.router.navigate(['/perfil', 'conductor_perfil']);
+            break;
+          case 'PASAJERO':
+            this.router.navigate(['/perfil', 'perfil_usuario']);
+            break;
+          default:
+            this.router.navigate(['/home']);
         }
       })
     );

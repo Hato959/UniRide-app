@@ -48,13 +48,7 @@
               </div>
             </div>
             <!-- Botón de Envío de Código -->
-            <button
-              type="button"
-              (click)="enviarCodigo()"
-              class="btn-secondary"
-              [disabled]="loadingCode()">
-              {{ loadingCode() ? 'Enviando...' : (codeSent() ? 'Reenviar código' : 'Enviar código') }}
-            </button>
+
           </div>
         </div>
 
@@ -74,7 +68,7 @@
               [class.error-border]="isFieldInvalid('dni')">
 
             <!-- Botón de formato DNI -->
-            <button type="button" (click)="validarFormatoDni()" class="btn-red btn-medium">Verificar DNI</button>
+
           </div>
           @if (isFieldInvalid('dni')) {
             <small class="error-msg">DNI debe tener 8 dígitos</small>
@@ -103,13 +97,7 @@
 
           <!-- Botón Final -->
           <div class="footer-action">
-            <button
-              type="button"
-              (click)="verificarCuenta()"
-              class="btn-red btn-large"
-              [disabled]="loadingVerify()">
-              {{ loadingVerify() ? 'Verificando...' : 'Verificar mi cuenta' }}
-            </button>
+
           </div>
 
         </div>

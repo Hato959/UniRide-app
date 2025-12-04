@@ -81,6 +81,26 @@ import { PasajeroService } from './../../../core/services/passenger.service';
   `]
 })
 export class ConductorProfileComponent implements OnInit {
+  constructor(private router: Router, private authService: AuthService) {}
+
+  get driverName(): string {
+    return this.authService.currentUser()?.nombre ?? 'Conductor';
+  }
+
+  goToCrearViaje(): void {
+    this.router.navigate(['/driver_home', 'crear_viaje_conductor']);
+  }
+
+  goToRegistroConductor(): void {
+    this.router.navigate(['/driver_home', 'registro_conductor']);
+  }
+
+  goToRegistroVehiculo(): void {
+    this.router.navigate(['/driver_home', 'registro_vehiculo']);
+  }
+
+  goToViajes(): void {
+    this.router.navigate(['/driver_home', 'conductor_viajes']);
   usuario = signal<UsuarioResponse | null>(null);
   conductor = signal<ConductorResponse | null>(null);
   vehiculo = signal<VehiculoResponse | null>(null);
