@@ -1,0 +1,40 @@
+<section class="detalle-wrapper" *ngIf="viaje() as v; else cargandoTpl">
+  <header class="detalle-header">
+    <button class="back-btn" (click)="volver()">← Volver a viajes</button>
+    <div>
+      <h1>{{ v.origen }} → {{ v.destino }}</h1>
+      <p *ngIf="v.fechaSalida || v.horaSalida">
+        {{ v.fechaSalida }} {{ v.horaSalida }}
+      </p>
+      <p *ngIf="v.estado" class="estado">
+        Estado: <strong>{{ v.estado }}</strong>
+      </p>
+    </div>
+  </header>
+
+  <section class="detalle-actions" *ngIf="esConductor() && !esViajeFinalizado()">
+    <h2>Gestionar viaje</h2>
+    <div class="acciones-botones">
+      <button class="primary-btn" (click)="enviarEvento('INICIO_VIAJE')">
+        Iniciar viaje
+      </button>
+      <button class="primary-btn secondary" (click)="enviarEvento('RECOGIO_PASAJERO')">
+        Registrar recogida pasajero
+      </button>
+      <button class="primary-btn danger" (click)="enviarEvento('TERMINO_VIAJE')">
+        Finalizar viaje
+      </button>
+    </div>
+  </section>
+
+  <section class="detalle-timeline">
+    <h2>Línea de tiempo del viaje</h2>
+    <app-viaje-eventos-timeline [eventos]="eventos()"></app-viaje-eventos-timeline>
+  </section>
+</section>
+
+<ng-template #cargandoTpl>
+  <section class="detalle-wrapper">
+    <p>Cargando información del viaje...</p>
+  </section>
+</ng-template>

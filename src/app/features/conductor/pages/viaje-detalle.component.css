@@ -1,0 +1,78 @@
+.detalle-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 2rem;
+}
+
+.detalle-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.back-btn {
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  background-color: #f4f4f4;
+}
+
+.detalle-header h1 {
+  margin: 0 0 0.25rem;
+}
+
+.detalle-header p {
+  margin: 0.1rem 0;
+  color: #555;
+}
+
+.detalle-header .estado {
+  margin-top: 0.25rem;
+}
+
+.detalle-actions {
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background-color: #f5f7fb;
+}
+
+.acciones-botones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.primary-btn {
+  padding: 0.55rem 1.2rem;
+  border-radius: 999px;
+  border: none;
+  background-color: #3498db;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.primary-btn.secondary {
+  background-color: #27ae60;
+}
+
+.primary-btn.danger {
+  background-color: #e74c3c;
+}
+
+.primary-btn:hover {
+  filter: brightness(0.95);
+}
+
+.detalle-timeline {
+  margin-top: 1rem;
+}

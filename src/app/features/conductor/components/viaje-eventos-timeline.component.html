@@ -1,0 +1,21 @@
+<div class="timeline-wrapper" *ngIf="eventos?.length; else sinEventos">
+  <div class="timeline-line"></div>
+  <div
+    class="timeline-item"
+    *ngFor="let evento of ordenarPorFecha(eventos); let i = index">
+    <div class="timeline-dot"></div>
+    <div class="timeline-card">
+      <div class="timeline-type">{{ traducirTipo(evento.tipo) }}</div>
+      <div class="timeline-datetime">
+        {{ evento.fechaHora | date:'short' }}
+      </div>
+      <div class="timeline-description" *ngIf="evento.descripcion">
+        {{ evento.descripcion }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #sinEventos>
+  <p class="timeline-empty">Aún no hay eventos registrados para este viaje.</p>
+</ng-template>

@@ -1,0 +1,59 @@
+.timeline-wrapper {
+  position: relative;
+  padding-left: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: #d0d0d0;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -2px;
+  top: 8px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: #3498db;
+}
+
+.timeline-card {
+  margin-left: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.timeline-type {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.timeline-datetime {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 0.25rem;
+}
+
+.timeline-description {
+  font-size: 0.9rem;
+}
+
+.timeline-empty {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+}

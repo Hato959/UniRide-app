@@ -1,0 +1,83 @@
+<section class="viajes-wrapper">
+
+  <header class="viajes-header">
+    <h1>Viajes</h1>
+    <p *ngIf="esConductor()">Gestiona tus rutas como conductor.</p>
+    <p *ngIf="esPasajero()">Busca y reserva viajes como pasajero.</p>
+  </header>
+
+  <div class="viajes-actions" *ngIf="esConductor()">
+    <button class="primary-btn" (click)="toggleFormulario()">
+      {{ mostrarFormulario() ? 'Cerrar formulario' : 'Crear nueva ruta' }}
+    </button>
+  </div>
+
+  <div class="viajes-actions" *ngIf="esPasajero()">
+    <button class="primary-btn">
+      Iniciar búsqueda de viaje
+    </button>
+  </div>
+
+  <!-- FORMULARIO DE CREAR VIAJE (solo conductor) -->
+  <div *ngIf="mostrarFormulario() && esConductor()" class="form-container">
+    <h2>Crear nueva ruta</h2>
+    <form (ngSubmit)="crearViaje()">
+      <div class="form-grid">
+        <label>
+          Origen
+          <input type="text" [(ngModel)]="formViaje.origen" name="origen" required />
+        </label>
+        <label>
+          Destino
+          <input type="text" [(ngModel)]="formViaje.destino" name="destino" required />
+        </label>
+        <label>
+          Fecha
+          <input type="date" [(ngModel)]="formViaje.fechaSalida" name="fechaSalida" required />
+        </label>
+        <label>
+          Hora
+          <input type="time" [(ngModel)]="formViaje.horaSalida" name="horaSalida" required />
+        </label>
+        <label>
+          Asientos
+          <input type="number" min="1" [(ngModel)]="formViaje.asientosDisponibles" name="asientos" required />
+        </label>
+        <label>
+          Precio
+          <input type="number" min="0" step="0.5" [(ngModel)]="formViaje.precio" name="precio" required />
+        </label>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="primary-btn">Guardar ruta</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- LISTA DE VIAJES -->
+  <section class="viajes-list">
+    <h2>Viajes anteriores</h2>
+
+    <p *ngIf="cargando()">Cargando viajes...</p>
+    <p *ngIf="!cargando() && !viajes().length">No hay viajes registrados.</p>
+
+    <div class="viaje-card" *ngFor="let viaje of viajes()">
+      <div class="viaje-main">
+        <div class="viaje-route">
+          <strong>{{ viaje.origen }}</strong>
+          <span class="arrow">→</span>
+          <strong>{{ viaje.destino }}</strong>
+        </div>
+        <div class="viaje-meta">
+          <span *ngIf="viaje.fechaSalida">{{ viaje.fechaSalida }} {{ viaje.horaSalida }}</span>
+          <span *ngIf="viaje.estado" class="chip">{{ viaje.estado }}</span>
+        </div>
+      </div>
+
+      <div class="viaje-actions">
+        <button class="info-btn" (click)="verDetalle(viaje)">i</button>
+      </div>
+    </div>
+  </section>
+</section>
