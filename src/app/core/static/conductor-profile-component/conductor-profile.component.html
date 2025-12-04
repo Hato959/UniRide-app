@@ -1,3 +1,66 @@
+<div class="profile-layout">
+      <div class="profile-container">
+
+        <!-- TÍTULO Y BOTONES DE ACCIÓN -->
+        <div class="actions-top-bar">
+          <!-- Botón de Cambio de Rol -->
+          @if (authService.currentPasajeroId) {
+            <button routerLink="/rol/cambiar" class="btn-change-role">Cambiar a Pasajero</button>
+          }
+          <h2 class="title-main">Mi cuenta</h2>
+          <button routerLink="/perfil/editar/conductor" class="btn-edit-profile">Editar Perfil</button>
+        </div>
+
+        <div class="profile-cards-grid">
+
+          <!-- CARD IZQUIERDA: INFORMACIÓN PERSONAL Y LICENCIA -->
+          <div class="profile-card profile-info">
+            <div class="user-data-wrapper">
+              <!-- Foto de perfil o Inicial -->
+              @if (usuario()?.fotoPerfilUrl) {
+                <img [src]="usuario()?.fotoPerfilUrl" alt="Foto de perfil" class="profile-photo">
+              } @else {
+                <div class="profile-photo placeholder-initial">{{ getInitialLetter() }}</div>
+              }
+
+              <div class="info-block">
+                <h3>{{ usuario()?.nombre }}</h3>
+                <p><strong>Carrera:</strong> {{ usuario()?.carrera || 'No especificada' }}</p>
+                <p><strong>Correo:</strong> {{ usuario()?.correoInstitucional || 'N/A' }}</p>
+                <p><strong>Distrito:</strong> {{ usuario()?.distrito || 'No especificado' }}</p>
+                <p class="license-info"><strong>Licencia:</strong> {{ conductor()?.licenciaConducir || 'N/A' }}</p>
+                <p><strong>Experiencia:</strong> {{ conductor()?.experienciaAnios }} años</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD DERECHA SUPERIOR: VEHÍCULO -->
+          <div class="profile-card vehicle-card">
+            <h3 class="red-title">Vehículo</h3>
+
+            @if (vehiculo()) {
+              <div class="vehicle-details">
+                <div class="vehicle-img-container">
+                  <img [src]="vehiculo()?.fotoVehiculoUrl || 'assets/images/placeholder-car.png'" alt="Foto del vehículo" class="vehicle-photo">
+                </div>
+                <div class="vehicle-info-text">
+                  <p><strong>Placa:</strong> {{ vehiculo()?.placa }}</p>
+                  <p><strong>Marca:</strong> {{ vehiculo()?.marca }}</p>
+                  <p><strong>Modelo:</strong> {{ vehiculo()?.modelo }}</p>
+                  <p><strong>Color:</strong> {{ vehiculo()?.color }}</p>
+                </div>
+              </div>
+            } @else {
+              <p class="muted-text">No hay vehículo registrado. <a routerLink="/perfil/registro-vehiculo">Añadir ahora.</a></p>
+            }
+          </div>
+
+
+
+
+        </div>
+      </div>
+    </div>
 <app-navbar-user></app-navbar-user>
 
 <div class="profile-layout">

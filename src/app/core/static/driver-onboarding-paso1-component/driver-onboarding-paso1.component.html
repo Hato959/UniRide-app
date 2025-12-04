@@ -1,0 +1,42 @@
+<div class="onboarding-layout">
+  <div class="form-card-wrapper">
+    <div class="onboarding-card">
+      <h2 class="title-main">Registro de Conductor</h2>
+      <form [formGroup]="driverForm" (ngSubmit)="onSubmit()">
+
+        <!-- Licencia -->
+        <div class="form-group">
+          <input
+            type="text"
+            formControlName="licenciaConducir"
+            placeholder="Número de Licencia de Conducir"
+            [class.error-border]="isFieldInvalid('licenciaConducir')">
+        </div>
+        @if (isFieldInvalid('licenciaConducir')) {
+            <small class="error-text">Licencia requerida.</small>
+        }
+
+        <!-- Años de Experiencia -->
+        <div class="form-group">
+          <input
+            type="number"
+            formControlName="experienciaAnios"
+            placeholder="Años de Experiencia"
+            min="0"
+            [class.error-border]="isFieldInvalid('experienciaAnios')">
+        </div>
+        @if (isFieldInvalid('experienciaAnios')) {
+            <small class="error-text">Experiencia (años) requerida.</small>
+        }
+
+        @if (errorMessage()) {
+          <div class="alert-error">{{ errorMessage() }}</div>
+        }
+
+        <button type="submit" class="btn-confirm" [disabled]="driverForm.invalid || loading()">
+          {{ loading() ? 'Guardando...' : 'Confirmar Datos' }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

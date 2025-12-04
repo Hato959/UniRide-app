@@ -2,8 +2,7 @@ import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { ConductorRegisterRequest, VehiculoRegisterRequest, VehiculoResponse, ConductorResponse } from '../models/driver.model';
-import { AuthService } from './auth.service';
+import { ConductorRegisterRequest, VehiculoRegisterRequest, VehiculoResponse, ConductorResponse, ConductorInfoResponse } from '../models/driver.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +31,15 @@ export class DriverService {
     });
   }
 
+  obtenerPerfil(usuarioId: number): Observable<ConductorResponse> {
+    return this.http.get<ConductorResponse>(`${this.baseUrl}/conductores/${usuarioId}`);
+  }
+
+  actualizarConductor(usuarioId: number, data: ConductorRegisterRequest): Observable<ConductorResponse> {
+    // Nota: Reutilizamos ConductorRegisterRequest (licencia, experiencia, usuarioId) para el PUT
+    return this.http.put<ConductorResponse>(`${this.baseUrl}/conductores/${usuarioId}`, data);
+  }
+
   // POST - Registrar Vehículo
   // Backend: VehiculoController @RequestMapping("/vehiculos") + @PostMapping("/registro")
   registrarVehiculo(data: VehiculoRegisterRequest): Observable<VehiculoResponse> {
@@ -43,7 +51,25 @@ export class DriverService {
       })
     );
   }
+  actualizarVehiculo(vehiculoId: number, data: VehiculoRegisterRequest): Observable<VehiculoResponse> {
+    return this.http.put<VehiculoResponse>(`${this.baseUrl}/vehiculos/${vehiculoId}`, data).pipe(
+      tap(updatedVehiculo => {
+        // Opcional: Actualizar el signal de vehículos localmente
+        this._vehiculos.update(current =>
+          current.map(v => v.id === vehiculoId ? updatedVehiculo : v)
+        );
+      })
+    );
+  }
+  subirFotoVehiculo(vehiculoId: number, file: File): Observable<VehiculoResponse> {
+        const formData: FormData = new FormData();
+        formData.append('file', file, file.name);
 
+        return this.http.post<VehiculoResponse>(
+            `${this.baseUrl}/vehiculos/${vehiculoId}/foto`,
+            formData
+        );
+    }
   // GET - Mis Vehículos
   // Backend: VehiculoController @GetMapping("/conductor/{conductorId}")
   getMisVehiculos(conductorId: number): Observable<VehiculoResponse[]> {
