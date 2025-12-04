@@ -56,7 +56,14 @@ export const routes: Routes = [
       {
         path: 'guia',
         loadChildren: () => import('./features/home/guia.routes').then(m => m.GUIA_ROUTES)
-      }
+      },
+      {
+      path: 'viajes',
+      loadChildren: () =>
+        import('./features/conductor/conductor.routes')
+          .then(m => m.CONDUCTOR_ROUTES)
+    }
+
     ]
   },
 
