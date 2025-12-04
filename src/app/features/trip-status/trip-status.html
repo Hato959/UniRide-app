@@ -1,0 +1,141 @@
+<div class="trip-page">
+  <!-- Top bar -->
+  <header class="top-bar">
+    <div class="brand">
+      <div class="brand-icon">UNI</div>
+      <span class="brand-name">UNIRIDE</span>
+    </div>
+
+    <div class="top-actions">
+      <button
+        class="icon-btn"
+        type="button"
+        routerLink="/pasenger-viz"
+        aria-label="Ver pasajero"
+      >
+        👤
+      </button>
+      <button class="icon-btn" type="button">MSG</button>
+      <button class="icon-btn" type="button">SRCH</button>
+      <button class="icon-btn" type="button">BELL</button>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="content">
+    <!-- Left column -->
+    <section class="left-column">
+      <div class="card timeline">
+        <h2>Linea de tiempo</h2>
+        <ul class="timeline-list">
+          <li class="done">Mateo empezo el viaje</li>
+          <li class="done">Mateo recogio a Pamela</li>
+          <li class="current">Mateo llego por ti</li>
+          <li>Pendiente: Llegada al campus</li>
+        </ul>
+      </div>
+
+      <div class="card mini-map">
+        <div class="mini-map-header">
+          <span>Casa</span>
+          <span>UPC</span>
+        </div>
+        <div class="mini-map-body">
+          <div class="mini-map-route">
+            20 min<br />
+            6,2 km
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Center column (big map) -->
+    <section class="center-column card">
+      <div class="map-header">
+        <span>San Borja</span>
+        <span>Santiago de Surco</span>
+      </div>
+
+      <div class="map-body">
+        <div class="map-placeholder">
+          <!-- here later you can integrate a real map -->
+          <span class="car-icon">CAR</span>
+        </div>
+      </div>
+
+      <div class="map-footer">
+        <div class="time-box">
+          <div class="time-icon">⏱</div>
+          <div>
+            <div>20 min</div>
+            <div class="muted">5,2 km</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right column -->
+    <section class="right-column">
+      <div class="card driver-card">
+        <div class="driver-header">
+          <button
+            class="driver-info driver-link"
+            type="button"
+            routerLink="/driver-viz"
+          >
+            <div class="driver-avatar">M</div>
+            <div>
+              <div class="muted small">Conductor</div>
+              <div class="driver-name">Mateo</div>
+            </div>
+          </button>
+          <div class="driver-photo">
+            <!-- replace with real image later -->
+            <div class="photo-placeholder">Foto</div>
+          </div>
+        </div>
+
+        <div class="vehicle-info">
+          <h2>Vehiculo</h2>
+          <p><strong>Placa:</strong> XSJ-593</p>
+          <p><strong>Marca:</strong> Kia</p>
+          <p><strong>Modelo:</strong> Rio</p>
+          <p><strong>Color:</strong> Blanco</p>
+        </div>
+      </div>
+
+      <div class="card payment-card">
+        <h2>Medios de pago</h2>
+        <div class="payment-body">
+          <div class="card-visual">
+            <div class="card-chip"></div>
+            <div class="card-number">XXXX 8765</div>
+          </div>
+          <button class="secondary-btn">Cambiar</button>
+        </div>
+      </div>
+
+      <button class="primary-btn finish-btn">Finalizar</button>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-main">
+      <div class="footer-title">UNIRIDE</div>
+      <div class="footer-slogan">
+        Movilidad universitaria segura y colaborativa
+      </div>
+    </div>
+
+    <div class="footer-contact">
+      <div>info@uniride.com</div>
+    </div>
+
+    <div class="footer-social">
+      <span>IG</span>
+      <span>TW</span>
+      <span>YT</span>
+    </div>
+  </footer>
+</div>
